@@ -14,4 +14,10 @@ app.get('/health-check', (req, res) => {
     })
 })
 
+app.post('/register', (req,res) => {
+    res.send({
+        message: `You have been registered with ${req.body.username} as your username and ${req.body.email} as your email`
+    })
+})
+
 app.listen(process.env.PORT || 8081)
