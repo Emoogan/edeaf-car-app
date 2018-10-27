@@ -3,6 +3,7 @@
 client/node_modules
 server/node_modules
 
+server/src/config/config.js
 node_modules/
 /dist/
 npm-debug.log*
