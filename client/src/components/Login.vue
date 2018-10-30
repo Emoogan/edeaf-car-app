@@ -7,7 +7,6 @@
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
           <v-text-field name="username" v-model="username" label="Username"></v-text-field>
-          <v-text-field name="email" v-model="email" label="Email"></v-text-field>
           <v-text-field name="password" type="password" v-model="password" label="Password"></v-text-field>
           <div v-html="error" class="error"/>
           <br>
@@ -24,7 +23,6 @@ export default {
   name: 'Login',
   data() {
     return {
-      email: '',
       password: '',
       username: '',
       error: null
@@ -34,7 +32,6 @@ export default {
     async login() {
       try {
         const response = await AuthenticationService.login({
-          email: this.email,
           password: this.password,
           username: this.username
         })
