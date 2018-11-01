@@ -6,11 +6,14 @@ import router from './router'
 import Vuetify from 'vuetify'
 import { sync } from 'vuex-router-sync'
 import store from '@/store/store'
+import Datetime from 'vue-datetime'
 import 'vuetify/dist/vuetify.min.css'
+import 'vue-datetime/dist/vue-datetime.css'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuetify)
+Vue.use(Datetime)
 
 sync(store, router)
 

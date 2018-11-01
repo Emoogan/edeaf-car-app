@@ -1,5 +1,5 @@
 <template>
-  <v-layout xs-center mt-5 column>
+  <v-layout xs-center column>
     <v-flex>
       <div class="white">
         <v-toolbar flat dense class="cyan" dark>
