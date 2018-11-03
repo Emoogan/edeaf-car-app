@@ -12,7 +12,14 @@ import 'vue-datetime/dist/vue-datetime.css'
 
 Vue.config.productionTip = false
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#26A69A', // teal lighten 1
+    secondary: '#0277BD', // light blue darken 3
+    accent: '#7CB342', // light green darken 1
+    error: '#F44336' // red
+  }
+})
 Vue.use(Datetime)
 
 sync(store, router)

@@ -45,11 +45,7 @@
       </v-flex>
       <!-- Todo: Use location api later? -->
       <v-flex xs12 sm6 md4>
-        <v-text-field label="Location"
-        prepend-icon="place"
-        v-model="location"
-        :rules="[required]">
-        </v-text-field>
+        <v-text-field label="Location" prepend-icon="place" v-model="location" :rules="[required]"></v-text-field>
       </v-flex>
       <v-flex xs12 sm6 md4>
         <v-text-field
@@ -62,19 +58,23 @@
       <v-flex md4>
         <v-btn color="primary" @click="createRequest">Request Car</v-btn>
       </v-flex>
+      <v-snackbar v-model="snackbar" :bottom="true" :multi-line="true" :timeout="6000">
+        {{ notificationText }}
+        <v-btn color="secondary" flat @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
     </v-layout>
   </v-form>
 </template>
 
 <script>
 import CarService from '@/services/CarService'
+import RequestService from '@/services/RequestService'
 export default {
   name: 'CarRequest',
   data() {
     return {
       minStartDatetime: new Date().toISOString(),
       minEndDatetime: new Date().toISOString(),
-      menuEndDate: false,
       beginDate: null,
       endDate: null,
       location: null,
@@ -82,7 +82,9 @@ export default {
       car: null,
       cars: [{ nickName: 'Please select a date range', id: 0 }],
       valid: false,
-      required: value => !!value || ''
+      required: value => !!value || '',
+      snackbar: false,
+      notificationText: ''
     }
   },
   watch: {
@@ -108,50 +110,60 @@ export default {
         if (response.data !== []) {
           this.cars = response.data
         } else {
-          // Todo: Use snackbar
-          console.log('No Cars Available')
+          this.notify('No Cars Available')
           this.cars = [
             { nickName: 'No cars available for that date range', id: 0 }
           ]
         }
       } catch (error) {
-        // Todo: Use snackbar
+        this.notify('Error finding cars')
         console.log(error.response.data.error)
       }
     },
+    notify(text) {
+      this.notificationText = text
+      this.snackbar = true
+    },
     async createRequest() {
       // check if everything is valid
-      if (!this.endDate || !this.beginDate) {
-        // Todo Use snackbar
-        console.log('You must select a valid date range')
+      if (!this.endDate || !this.beginDate || this.endDate === this.beginDate) {
+        this.notify('You must select a valid date range')
         return
       }
       if (!this.car || this.car.id === 0) {
-        // Todo Use snackbar
-        console.log('You must select a valid car')
+        this.notify('You must select a valid car')
         return
       }
       if (!this.reason) {
-        // Todo Use snackbar
-        console.log('You must give a valid reason')
+        this.notify('You must give a valid reason')
         return
       }
       if (!this.location) {
-        // Todo Use snackbar
-        console.log('You must give a valid location')
+        this.notify('You must give a valid location')
         return
       }
 
-      console.log('next')
-      // try {
-      //   await RequestService.create()
-      //   this.$router.push({
-      //     name: 'Home'
-      //     // name: 'Request'
-      //   })
-      // } catch (error) {
-      //   console.log('error', error)
-      // }
+      const request = {
+        startTime: this.beginDate,
+        finishTime: this.endDate,
+        location: this.location,
+        reason: this.reason,
+        CarId: this.car.id,
+        UserId: this.$store.state.user.id
+      }
+
+      try {
+        await RequestService.createPendingRequest(request)
+        // todo: notify of success
+        // this.notify(`You have successfully requested {{this.car.nickName}}`)
+        this.$router.push({
+          name: 'Login'
+          // name: 'Request'
+        })
+      } catch (error) {
+        this.notify(`This request could not be made`)
+        console.log('error', error)
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
   <v-layout xs-center column>
     <v-flex>
       <div class="white">
-        <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar flat dense class="secondary" dark>
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
@@ -20,9 +20,9 @@
               label="Password"
             ></v-text-field>
           </form>
-          <div v-html="error" class="error"/>
+          <div v-html="error" class="danger-alert"/>
           <br>
-          <v-btn class="cyan" dark @click="register">Register</v-btn>
+          <v-btn class="secondary" dark @click="register">Register</v-btn>
         </div>
       </div>
     </v-flex>
@@ -66,7 +66,4 @@ export default {
 </script>
 
 <style scoped>
-.error {
-  color: red;
-}
 </style>

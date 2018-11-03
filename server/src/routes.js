@@ -1,6 +1,8 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const CarController = require('./controllers/CarController')
+const RequestController = require('./controllers/RequestController')
+
 module.exports = (app) => {
     app.get('/health-check', (req, res) => {
     res.send({
@@ -12,5 +14,7 @@ module.exports = (app) => {
     app.post('/login', AuthenticationController.login)
 
     app.get('/cars', CarController.fetchCars)
+
+    app.post('/request-car', RequestController.request)
 
 }
