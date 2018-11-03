@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       model: { type: DataTypes.STRING },
       year: { type: DataTypes.SMALLINT },
       seatNumber: { type: DataTypes.SMALLINT },
+      office: { type: DataTypes.STRING }
     }
   )
   return Car

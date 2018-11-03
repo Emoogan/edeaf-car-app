@@ -22,7 +22,8 @@
     "morgan": "^1.9.1",
     "pg": "^7.6.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.41.0"
+    "sequelize": "^4.41.0",
+    "sequelize-fixtures": "^0.7.0"
   },
   "devDependencies": {
     "eslint": "^5.7.0",

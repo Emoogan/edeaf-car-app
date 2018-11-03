@@ -1,0 +1,138 @@
+[
+    {
+        "model": "Car",
+        "data": {
+            "id": 1,
+            "nickName": "Tiny",
+            "registrationNumber": "DL79KTGP",
+            "make": "KIA",
+            "model": "Picanto",
+            "year": 2016,
+            "seatNumber": 4,
+            "office": "JHB", 
+            "createdAt": "2016-01-01 00:00:00+00:00",
+            "updatedAt": "2016-01-01 00:00:00+00:00"
+
+        }
+    },
+    {
+        "model": "Car",
+        "data": {
+            "id": 2,
+            "nickName": "Governer",
+            "registrationNumber": "CR16ZNGP",
+            "make": "Nissan",
+            "model": "Almera",
+            "year": 2015,
+            "seatNumber": 5,
+            "office": "CENT", 
+            "createdAt": "2016-01-01 00:00:00+00:00",
+            "updatedAt": "2016-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "model": "Car",
+        "data": {
+            "id": 3,
+            "nickName": "The Tank",
+            "registrationNumber": "BZ96XWGP",
+            "make": "Mercedes",
+            "model": "Vito",
+            "year": 2010,
+            "seatNumber": 8,
+            "office": "JHB", 
+            "createdAt": "2016-01-01 00:00:00+00:00",
+            "updatedAt": "2016-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "model": "Car",
+        "data": {
+            "id": 4,
+            "nickName": "Soccer Mom",
+            "registrationNumber": "FF36XRGP",
+            "make": "Honda",
+            "model": "Mobilio",
+            "year": 2016,
+            "seatNumber": 7,
+            "office": "JHB", 
+            "createdAt": "2016-01-01 00:00:00+00:00",
+            "updatedAt": "2016-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "model": "Car",
+        "data": {
+            "id": 5,
+            "nickName": "Gugulethu",
+            "registrationNumber": "FR33PSGP",
+            "make": "Nissan",
+            "model": "NP200",
+            "year": 2016,
+            "seatNumber": 7,
+            "office": "JHB", 
+            "createdAt": "2016-01-01 00:00:00+00:00",
+            "updatedAt": "2016-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "model": "Car",
+        "data": {
+            "id": 6,
+            "nickName": "Vanilla",
+            "registrationNumber": "HJ86SZGP",
+            "make": "Honda",
+            "model": "Jazz",
+            "year": 2018,
+            "seatNumber": 5,
+            "office": "JHB", 
+            "createdAt": "2016-01-01 00:00:00+00:00",
+            "updatedAt": "2016-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "model": "Car",
+        "data": {
+            "id": 7,
+            "nickName": "Ice Cream",
+            "registrationNumber": "HJ86SN",
+            "make": "Honda",
+            "model": "Jazz",
+            "year": 2018,
+            "seatNumber": 5,
+            "office": "JHB", 
+            "createdAt": "2016-01-01 00:00:00+00:00",
+            "updatedAt": "2016-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "model": "Car",
+        "data": {
+            "id": 8,
+            "nickName": "Pudding",
+            "registrationNumber": "ND350300",
+            "make": "Honda",
+            "model": "Jazz",
+            "year": 2017,
+            "seatNumber": 5,
+            "office": "KZN", 
+            "createdAt": "2016-01-01 00:00:00+00:00",
+            "updatedAt": "2016-01-01 00:00:00+00:00"
+        }
+    },
+    {
+        "model": "Car",
+        "data": {
+            "id": 9,
+            "nickName": "Cliffy",
+            "registrationNumber": "CY345734",
+            "make": "Nissan",
+            "model": "Almera",
+            "year": 2017,
+            "seatNumber": 5,
+            "office": "CT", 
+            "createdAt": "2016-01-01 00:00:00+00:00",
+            "updatedAt": "2016-01-01 00:00:00+00:00"
+        }
+    }
+]
