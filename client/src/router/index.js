@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import CarRequest from '@/components/CarRequest'
+import Request from '@/components/Request'
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/car-request',
       name: 'CarRequest',
       component: CarRequest
+    },
+    {
+      path: '/requests',
+      name: 'Request',
+      component: Request
     },
     {
       path: '/register',
