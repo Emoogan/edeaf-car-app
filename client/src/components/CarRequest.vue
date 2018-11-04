@@ -1,69 +1,81 @@
 <template>
-  <v-form v-model="valid">
-    <v-layout column>
-      <h1>Book A Car</h1>
-      <v-flex xs11 md4>
-        <datetime
-          type="datetime"
-          placeholder="Start Date and Time"
-          :minute-step="15"
-          :min-datetime="minStartDatetime"
-          v-model="beginDate"
-          v-on:close="minEndDatetime = beginDate"
-          input-id="startDate"
-        >
-          <label for="startDate" slot="before">
-            <v-icon>access_time</v-icon>
-          </label>
-        </datetime>
-      </v-flex>
-      <v-flex xs6 md4>
-        <datetime
-          type="datetime"
-          placeholder="End Date and Time"
-          :minute-step="15"
-          :min-datetime="minEndDatetime"
-          v-model="endDate"
-          input-id="endDate"
-        >
-          <label for="endDate" slot="before">
-            <v-icon>access_time</v-icon>
-          </label>
-        </datetime>
-      </v-flex>
-      <v-flex xs6 md4>
-        <v-select
-          :items="cars"
-          item-text="nickName"
-          item-value="id"
-          v-model="car"
-          label="Car"
-          prepend-icon="directions_car"
-          single-line
-          return-object
-        ></v-select>
-      </v-flex>
-      <!-- Todo: Use location api later? -->
-      <v-flex xs12 sm6 md4>
-        <v-text-field label="Location" prepend-icon="place" v-model="location" :rules="[required]"></v-text-field>
-      </v-flex>
-      <v-flex xs12 sm6 md4>
-        <v-text-field
-          label="Reason"
-          prepend-icon="chrome_reader_mode"
-          v-model="reason"
-          :rules="[required]"
-        ></v-text-field>
-      </v-flex>
-      <v-flex md4>
-        <v-btn color="primary" @click="createRequest">Request Car</v-btn>
+  <v-layout align-content-start align-center column>
+    <!-- <v-form v-model="valid"> -->
+    <v-flex  xs12 sm12 md8 lg12 class="white elevation-2">
+        <v-toolbar flat dense color="secondary" dark>
+          <v-toolbar-title>Book A Car</v-toolbar-title>
+        </v-toolbar>
+        <v-flex xs12 md8 lg12 class="pt-2">
+            <datetime
+              type="datetime"
+              placeholder="Start Date and Time"
+              :minute-step="15"
+              :min-datetime="minStartDatetime"
+              v-model="beginDate"
+              v-on:close="minEndDatetime = beginDate"
+              input-id="startDate"
+            >
+              <label for="startDate" slot="before">
+                <v-icon>access_time</v-icon>
+              </label>
+            </datetime>
+        </v-flex>
+        <v-flex>
+          <div>
+            <datetime
+              type="datetime"
+              placeholder="End Date and Time"
+              :minute-step="15"
+              :min-datetime="minEndDatetime"
+              v-model="endDate"
+              input-id="endDate"
+            >
+              <label for="endDate" slot="before">
+                <v-icon>access_time</v-icon>
+              </label>
+            </datetime>
+          </div>
+        </v-flex>
+        <v-flex class="pl-3">
+          <v-select
+            :items="cars"
+            item-text="nickName"
+            item-value="id"
+            v-model="car"
+            label="Car"
+            prepend-icon="directions_car"
+            single-line
+            return-object
+          ></v-select>
+        </v-flex>
+        <!-- Todo: Use location api later? -->
+        <v-flex class="pl-3">
+          <v-text-field
+            label="Location"
+            prepend-icon="place"
+            v-model="location"
+            :rules="[required]"
+          ></v-text-field>
+        </v-flex>
+        <v-flex class="pl-3">
+          <v-text-field
+            label="Reason"
+            prepend-icon="chrome_reader_mode"
+            v-model="reason"
+            :rules="[required]"
+          ></v-text-field>
+        </v-flex>
+        <v-flex md6 align-content-center>
+          <v-btn color="primary" @click="createRequest">Request Car</v-btn>
+        </v-flex>
       </v-flex>
       <v-snackbar v-model="snackbar" :bottom="true" :multi-line="true" :timeout="6000">
         {{ notificationText }}
         <v-btn color="secondary" flat @click="snackbar = false">Close</v-btn>
       </v-snackbar>
-    </v-layout>
-  </v-form>
+      <!-- </v-form> -->
+    <!-- </v-flex> -->
+  </v-layout>
 </template>
 
 <script>
