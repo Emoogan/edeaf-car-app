@@ -11,7 +11,7 @@
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn v-if="$store.state.isUserLoggedIn" flat>Calendar</v-btn>
       <v-btn v-if="$store.state.isUserLoggedIn" :to="{name: 'CarRequest'}" flat>Request Car</v-btn>
-      <v-btn v-if="$store.state.isUserLoggedIn" flat>Pending requests</v-btn>
+      <v-btn v-if="$store.state.isUserLoggedIn" :to="{name: 'Request'}" flat>Pending requests</v-btn>
       <v-btn v-if="$store.state.isUserLoggedIn" flat>Approved requests</v-btn>
       <v-btn v-if="!$store.state.isUserLoggedIn" flat :to="{name: 'Login'}">Login</v-btn>
       <v-btn v-if="!$store.state.isUserLoggedIn" flat :to="{name: 'Register'}">Register</v-btn>
@@ -34,7 +34,7 @@ export default {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({
-        name: 'Home'
+        name: 'Login'
       })
     }
   }

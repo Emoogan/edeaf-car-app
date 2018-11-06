@@ -169,8 +169,7 @@ export default {
         // todo: notify of success
         // this.notify(`You have successfully requested {{this.car.nickName}}`)
         this.$router.push({
-          name: 'Login'
-          // name: 'Request'
+          name: 'Request'
         })
       } catch (error) {
         this.notify(`This request could not be made`)

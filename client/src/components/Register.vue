@@ -1,7 +1,7 @@
 <template>
   <v-layout xs-center column>
-    <v-flex>
-      <div class="white">
+    <v-flex xs4>
+      <div class="white elevation-4">
         <v-toolbar flat dense class="secondary" dark>
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>

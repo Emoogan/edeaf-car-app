@@ -15,6 +15,7 @@ module.exports = (app) => {
 
     app.get('/cars', CarController.fetchCars)
 
-    app.post('/request-car', RequestController.request)
+    app.post('/request-car', RequestController.createRequest)
+    app.get('/pending-requests', RequestController.pendingRequests)
 
 }
