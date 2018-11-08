@@ -13,6 +13,8 @@ app.use(cors())
 
 require('./routes')(app)
 
+require("./controllers/TransportController").createTransporter()
+
 const newDb = false
 sequelize.sync({ force: newDb }).then(() => {
   if (newDb) {

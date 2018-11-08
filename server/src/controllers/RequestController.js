@@ -1,11 +1,12 @@
 const { Request, User, Car } = require('../models')
 module.exports = {
-  async createRequest(req, res) {
+  async createRequest(req, res, next) {
     try {
       // create new request will always have status pending
       req.body['status'] = 'Pending'
       const request = await Request.create(req.body)
-      res.status(200).send(request)
+      res.locals.request = request
+      next()
     } catch (err) {
       res.status(400).send({
         error: 'This request could not be made'
@@ -19,7 +20,6 @@ module.exports = {
       // if user is not admin, get pending for that user only
       const { userId } = req.query
       const user = await User.findByPk(userId)
-      //   console.log('server here user', user)
       if (!user) {
         res.status(403).send({
           error: 'This user is not registered'
@@ -54,19 +54,34 @@ module.exports = {
       })
     }
   },
-  async updateStatusWithStatusReason(req, res) {
+  async updateStatusWithStatusReason(req, res, next) {
     try {
       const { requestId, status, statusReason } = req.query
-      const request = await Request.findByPk(requestId)
+      const request = await Request.findByPk(requestId, {
+        include: [
+          { model: Car },
+          {
+            model: User,
+            attributes: ['firstName', 'lastName', 'email']
+          }
+        ]
+      })
       if (request !== null) {
-        request.status = status
-        const fields = ['status']
-        if (statusReason !== null) {
-          request.statusReason = statusReason
-          fields.push('statusReason')
+        if (request.status === 'Pending') {
+          request.status = status
+          const fields = ['status']
+          if (statusReason !== null) {
+            request.statusReason = statusReason
+            fields.push('statusReason')
+          }
+          request.save({ fields: fields })
+          res.locals.request = request
+          next()
+        } else {
+          return res.status(400).send({
+            error: 'This request has already been actioned'
+          })
         }
-        request.save({ fields: fields })
-        return res.status(204).send()
       } else {
         return res.status(400).send({
           error: 'This request does not exist'
