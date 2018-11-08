@@ -17,5 +17,6 @@ module.exports = (app) => {
 
     app.post('/request-car', RequestController.createRequest)
     app.get('/pending-requests', RequestController.pendingRequests)
+    app.put('/update-request', RequestController.updateStatusWithStatusReason)
 
 }

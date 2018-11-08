@@ -6,6 +6,17 @@ export default {
   },
 
   getPendingRequests(userId) {
-    return Api().get('pending-requests', {params: {userId: userId}})
+    return Api().get('pending-requests', { params: { userId: userId } })
+  },
+
+  setStatus(requestId, status, statusReason) {
+    const params = {
+      requestId: requestId,
+      status: status,
+      statusReason: statusReason
+    }
+    return Api().put('update-request', null, {
+      params: params
+    })
   }
 }

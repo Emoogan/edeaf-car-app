@@ -53,5 +53,29 @@ module.exports = {
         error: 'Server Error'
       })
     }
+  },
+  async updateStatusWithStatusReason(req, res) {
+    try {
+      const { requestId, status, statusReason } = req.query
+      const request = await Request.findByPk(requestId)
+      if (request !== null) {
+        request.status = status
+        const fields = ['status']
+        if (statusReason !== null) {
+          request.statusReason = statusReason
+          fields.push('statusReason')
+        }
+        request.save({ fields: fields })
+        return res.status(204).send()
+      } else {
+        return res.status(400).send({
+          error: 'This request does not exist'
+        })
+      }
+    } catch (error) {
+      return res.status(500).send({
+        error: 'Server Error'
+      })
+    }
   }
 }

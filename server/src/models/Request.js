@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     finishTime: { type: DataTypes.DATE },
     location: { type: DataTypes.STRING },
     reason: { type: DataTypes.STRING },
-    status: { type: DataTypes.STRING }
+    status: { type: DataTypes.STRING },
+    statusReason: { type: DataTypes.STRING }
     //inferred associations: carId and userId
   })
 
