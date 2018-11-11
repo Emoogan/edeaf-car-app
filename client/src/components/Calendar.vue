@@ -10,6 +10,7 @@
         <div slot="multi-day-row" slot-scope="{customData, day}">
           {{getDateDisplay(day.date, customData.startTime, customData.finishTime)}}
           {{customData.User.firstName}}, {{customData.Car.nickName}}
+          <v-icon small>{{getIconDisplay(customData.status)}}</v-icon>
         </div>
       </v-calendar>
     </v-flex>
@@ -17,7 +18,6 @@
 </template>
 
 <script>
-// import CAR_COLOUR from '../constants/carColours'
 import RequestService from '@/services/RequestService'
 export default {
   name: 'Calendar',
@@ -41,7 +41,8 @@ export default {
           width: '80%'
         },
         header: {
-          fontSize: '18pt',
+          backgroundColor: '#7CB342',
+          color: 'white',
           padding: `10px ${hSpacing}`
         },
         headerTitle: {
@@ -101,8 +102,17 @@ export default {
         } else {
         }
       } catch (error) {
-        // todo: global notifier
+        this.$toasted.show(`Error: ${error}`, {
+          icon: 'priority_high'
+        })
         console.log(error)
+      }
+    },
+    getIconDisplay(status) {
+      if (status === 'Pending') {
+        return 'watch_later'
+      } else {
+        return 'check'
       }
     },
     getDateDisplay(currentDate, startDateTime, finishDateTime) {

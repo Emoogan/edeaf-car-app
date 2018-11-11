@@ -1,90 +1,87 @@
 <template>
-  <v-layout align-content-start align-center column>
-    <!-- <v-form v-model="valid"> -->
-    <v-flex  xs12 sm12 md8 lg12 class="white elevation-2">
-        <v-toolbar flat dense color="secondary" dark>
-          <v-toolbar-title>Book A Car</v-toolbar-title>
-        </v-toolbar>
-        <v-flex xs12 md8 lg12 class="pt-2">
-            <datetime
-              type="datetime"
-              placeholder="Start Date and Time"
-              :minute-step="15"
-              :min-datetime="minStartDatetime"
-              v-model="beginDate"
-              v-on:close="minEndDatetime = beginDate"
-              input-id="startDate"
-            >
-              <label for="startDate" slot="before">
-                <v-icon>access_time</v-icon>
-              </label>
-            </datetime>
-        </v-flex>
-        <v-flex>
-          <div>
-            <datetime
-              type="datetime"
-              placeholder="End Date and Time"
-              :minute-step="15"
-              :min-datetime="minEndDatetime"
-              v-model="endDate"
-              input-id="endDate"
-            >
-              <label for="endDate" slot="before">
-                <v-icon>access_time</v-icon>
-              </label>
-            </datetime>
-          </div>
-        </v-flex>
-        <v-flex class="pl-3">
-          <v-select
-            :items="cars"
-            item-text="nickName"
-            item-value="id"
-            v-model="car"
-            label="Car"
-            prepend-icon="directions_car"
-            single-line
-            return-object
-          ></v-select>
-        </v-flex>
+  <v-layout row wrap>
+    <v-flex fill-height xs12 md4 offset-md4 class="white elevation-2">
+    <!-- Loading -->
+    <loading :value="isLoading"></loading>
+      <!-- Header -->
+      <v-toolbar flat dense color="secondary" dark>
+        <v-toolbar-title>Book A Car</v-toolbar-title>
+      </v-toolbar>
+      <!-- Content -->
+      <v-flex class="pl-4 pr-4 pt-2 pb-2">
+        <!-- Start Date -->
+        <datetime
+        class="pl-4 pr-4 pt-2 pb-2"
+          type="datetime"
+          placeholder="Start Date and Time"
+          :minute-step="15"
+          :min-datetime="minStartDatetime"
+          v-model="beginDate"
+          v-on:close="minEndDatetime = beginDate"
+          input-id="startDate"
+        >
+          <label for="startDate" slot="before">
+            <v-icon>access_time</v-icon>
+          </label>
+        </datetime>
+        <!-- End Date -->
+        <datetime
+        class="pl-4 pr-4 pt-2 pb-2"
+          type="datetime"
+          placeholder="End Date and Time"
+          :minute-step="15"
+          :min-datetime="minEndDatetime"
+          v-model="endDate"
+          input-id="endDate"
+        >
+          <label for="endDate" slot="before">
+            <v-icon>access_time</v-icon>
+          </label>
+        </datetime>
+        <!-- Cars -->
+        <v-select
+          :items="cars"
+          item-text="nickName"
+          item-value="id"
+          v-model="car"
+          label="Car"
+          prepend-icon="directions_car"
+          single-line
+          return-object
+        ></v-select>
+        <!-- Location -->
         <!-- Todo: Use location api later? -->
-        <v-flex class="pl-3">
-          <v-text-field
-            label="Location"
-            prepend-icon="place"
-            v-model="location"
-            :rules="[required]"
-          ></v-text-field>
-        </v-flex>
-        <v-flex class="pl-3">
-          <v-text-field
-            label="Reason"
-            prepend-icon="chrome_reader_mode"
-            v-model="reason"
-            :rules="[required]"
-          ></v-text-field>
-        </v-flex>
-        <v-flex md6 align-content-center>
-          <v-btn color="primary" @click="createRequest">Request Car</v-btn>
-        </v-flex>
+        <v-text-field label="Location" prepend-icon="place" v-model="location" :rules="[required]"></v-text-field>
+        <!-- Reason -->
+        <v-text-field
+          label="Reason"
+          prepend-icon="chrome_reader_mode"
+          v-model="reason"
+          :rules="[required]"
+        ></v-text-field>
+        <!-- Request Car Button -->
+        <v-btn color="primary" @click="createRequest">Request Car</v-btn>
       </v-flex>
       <v-snackbar v-model="snackbar" :bottom="true" :multi-line="true" :timeout="6000">
         {{ notificationText }}
         <v-btn color="secondary" flat @click="snackbar = false">Close</v-btn>
       </v-snackbar>
-      <!-- </v-form> -->
-    <!-- </v-flex> -->
+    </v-flex>
   </v-layout>
 </template>
 
 <script>
 import CarService from '@/services/CarService'
 import RequestService from '@/services/RequestService'
+import Loading from '@/components/Loading.vue'
 export default {
   name: 'CarRequest',
+  components: {
+    Loading
+  },
   data() {
     return {
+      isLoading: false,
       minStartDatetime: new Date().toISOString(),
       minEndDatetime: new Date().toISOString(),
       beginDate: null,
@@ -165,13 +162,20 @@ export default {
       }
 
       try {
+        this.isLoading = true
         await RequestService.createPendingRequest(request)
-        // todo: notify of success
-        // this.notify(`You have successfully requested {{this.car.nickName}}`)
+        this.isLoading = false
+        this.$toasted.show(
+          `You have successfully requested ${this.car.nickName}`,
+          {
+            icon: 'check'
+          }
+        )
         this.$router.push({
           name: 'Request'
         })
       } catch (error) {
+        this.isLoading = false
         this.notify(`This request could not be made`)
         console.log('error', error)
       }

@@ -12,7 +12,7 @@
       <v-btn v-if="$store.state.isUserLoggedIn" :to="{name: 'Calendar'}" flat>Calendar</v-btn>
       <v-btn v-if="$store.state.isUserLoggedIn" :to="{name: 'CarRequest'}" flat>Request Car</v-btn>
       <v-btn v-if="$store.state.isUserLoggedIn" :to="{name: 'Request'}" flat>Pending requests</v-btn>
-      <v-btn v-if="$store.state.isUserLoggedIn" flat>Approved requests</v-btn>
+      <!-- <v-btn v-if="$store.state.isUserLoggedIn" flat>Approved requests</v-btn> -->
       <v-btn v-if="!$store.state.isUserLoggedIn" flat :to="{name: 'Login'}">Login</v-btn>
       <v-btn v-if="!$store.state.isUserLoggedIn" flat :to="{name: 'Register'}">Register</v-btn>
       <v-btn v-if="$store.state.isUserLoggedIn" flat>{{$store.state.user.username}} ({{$store.state.user.office}})</v-btn>

@@ -1,5 +1,7 @@
 <template>
   <v-layout xs-center column>
+        <!-- Loading -->
+    <loading :value="isLoading"></loading>
     <v-flex xs4>
       <div class="white elevation-4">
         <v-toolbar flat dense class="secondary" dark>
@@ -31,8 +33,12 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Loading from '@/components/Loading.vue'
 export default {
   name: 'Register',
+    components: {
+    Loading
+  },
   data() {
     return {
       email: '',
@@ -42,12 +48,14 @@ export default {
       lastName: '',
       office: '',
       error: null,
-      offices: ['Centurion', 'Durban', 'Cape Town', 'Johannesburg']
+      offices: ['Centurion', 'Durban', 'Cape Town', 'Johannesburg'],
+      isLoading: false
     }
   },
   methods: {
     async register() {
       try {
+        this.isLoading = true
         const response = await AuthenticationService.register({
           email: this.email,
           password: this.password,
@@ -56,8 +64,14 @@ export default {
           firstName: this.firstName,
           office: this.office
         })
-        console.log(response.data)
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
+        this.isLoading = false
+        this.$router.push({
+          name: 'CarRequest'
+        })
       } catch (error) {
+        this.isLoading = false
         this.error = error.response.data.error
       }
     }

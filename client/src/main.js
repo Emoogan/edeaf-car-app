@@ -8,6 +8,7 @@ import { sync } from 'vuex-router-sync'
 import store from '@/store/store'
 import Datetime from 'vue-datetime'
 import VCalendar from 'v-calendar'
+import Toasted from 'vue-toasted'
 import 'vuetify/dist/vuetify.min.css'
 import 'vue-datetime/dist/vue-datetime.css'
 import 'v-calendar/lib/v-calendar.min.css'
@@ -26,6 +27,7 @@ Vue.use(Datetime)
 Vue.use(VCalendar, {
   firstDayOfWeek: 2 // Monday
 })
+Vue.use(Toasted, { duration: 4000, position: 'bottom-center' })
 
 sync(store, router)
 
