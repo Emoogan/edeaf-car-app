@@ -1,6 +1,6 @@
 <template>
   <v-layout xs-center column>
-        <!-- Loading -->
+    <!-- Loading -->
     <loading :value="isLoading"></loading>
     <v-flex xs4>
       <div class="white elevation-4">
@@ -36,7 +36,7 @@ import AuthenticationService from '@/services/AuthenticationService'
 import Loading from '@/components/Loading.vue'
 export default {
   name: 'Register',
-    components: {
+  components: {
     Loading
   },
   data() {
