@@ -1,4 +1,6 @@
 const { Request, User, Car } = require('../models')
+const { Sequelize } = require('../models')
+
 module.exports = {
   async createRequest(req, res, next) {
     try {
@@ -49,7 +51,7 @@ module.exports = {
         }
       }
     } catch (err) {
-      response.status(400).send({
+      res.status(400).send({
         error: 'Server Error'
       })
     }
@@ -90,6 +92,38 @@ module.exports = {
     } catch (error) {
       return res.status(500).send({
         error: 'Server Error'
+      })
+    }
+  },
+
+  async calendarRequests(req, res) {
+    try {
+      // get pending and approved requests... eventually limit to future only
+
+      const requests = await Request.findAll({
+        where: {
+            status: {
+              [Sequelize.Op.or]: ['Pending', 'Approved']
+            }
+          },
+        include: [
+          { model: Car },
+          {
+            model: User,
+            attributes: ['firstName', 'lastName']
+          }
+        ]
+      })
+      if (requests === [] || requests === null) {
+        return res.status(403).send({
+          error: 'There are no pending or approved requests'
+        })
+      } else {
+        return res.status(200).send(requests)
+      }
+    } catch (err) {
+      res.status(500).send({
+        error: `Server Error, ${err}`
       })
     }
   }

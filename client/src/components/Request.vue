@@ -1,23 +1,26 @@
 <template>
   <v-layout row wrap="">
     <div v-if="noRequests">No requests :(</div>
-    <v-flex xs12 md3 class="pa-1" v-for="request in requests" :key="request.id">
+    <v-flex xs12 md3 fill-height class="pa-1" v-for="request in requests" :key="request.id">
       <v-card>
         <v-card-title primary-title>
-          <div>
+          <v-flex column>
             <h3
               class="headline mb-0 text-xs-center"
-            >{{ request.User.firstName }} {{ request.User.lastName }} - {{ request.Car.nickName }}</h3>
-            <div>
-              <p class="text-xs-center">From: {{formatDate(request.startTime)}}</p>
-              <p class="text-xs-center">To: {{formatDate(request.finishTime)}}</p>
-              <p class="text-xs-center">At: {{ request.location }}</p>
-              <p class="text-xs-center">For: {{ request.reason }}</p>
-            </div>
-          </div>
+            >{{ request.Car.nickName }}</h3>
+
+              <h2>{{ request.User.firstName }} {{ request.User.lastName }}</h2>
+            <v-flex>
+              <div class="text-xs-center text-md-center"><b>From:</b> {{formatDate(request.startTime)}}</div>
+              <div class="text-xs-center"><b>To:</b> {{formatDate(request.finishTime)}}</div>
+              <div class="text-xs-center"><b>At:</b> {{ request.location }}</div>
+              <div class="text-xs-center"><b>For:</b> {{ request.reason }}</div>
+            </v-flex>
+          </v-flex>
         </v-card-title>
+        <v-divider light></v-divider>
         <v-card-actions>
-          <v-flex row>
+          <v-flex row wrap>
           <!-- Approve Button -->
           <v-btn
             v-if="$store.state.user.role === 'Admin'"
@@ -26,6 +29,7 @@
           >Approve</v-btn>
           <!-- Deny Button -->
           <v-dialog
+          class="px-1"
             ref="dialog"
             v-if="$store.state.user.role === 'Admin'"
             v-model="denyDialog"
@@ -55,6 +59,7 @@
             v-if="$store.state.user.id === request.UserId"
             color="accent"
             @click="cancelRequest(request.id)"
+            class="my-1"
           >Cancel</v-btn>
           </v-flex>
         </v-card-actions>

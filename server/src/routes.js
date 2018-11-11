@@ -20,6 +20,7 @@ module.exports = app => {
   app.get('/cars', CarController.fetchCars)
 
   app.get('/pending-requests', RequestController.pendingRequests)
+  app.get('/calendar-requests', RequestController.calendarRequests)
   app.post('/request-car', RequestController.createRequest, EmailController.sendCreatedRequestEmail)
   app.put('/update-request', RequestController.updateStatusWithStatusReason, EmailController.sendActionedRequestEmail)
 

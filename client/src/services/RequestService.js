@@ -9,6 +9,10 @@ export default {
     return Api().get('pending-requests', { params: { userId: userId } })
   },
 
+  getCalendarDates() {
+    return Api().get('calendar-requests')
+  },
+
   setStatus(requestId, status, statusReason) {
     const params = {
       requestId: requestId,

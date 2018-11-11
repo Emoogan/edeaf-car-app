@@ -1,7 +1,11 @@
 <template>
   <v-layout row wrap="">
-    <v-flex fill-height d-flex xs12 md9 lg1>
-      <v-calendar height="100%" :attributes="calendarDates" :formats="calendarFormats">
+    <v-flex d-flex xs12 md9 lg6 offset-lg3>
+      <v-calendar
+        :attributes="calendarDates"
+        :formats="calendarFormats"
+        :theme-styles="calendarStyles"
+      >
         <!-- POPOVER SLOT -->
         <div slot="multi-day-row" slot-scope="{customData, day}">
           {{getDateDisplay(day.date, customData.startTime, customData.finishTime)}}
@@ -18,12 +22,43 @@ import RequestService from '@/services/RequestService'
 export default {
   name: 'Calendar',
   data() {
+    const hSpacing = '15px'
     return {
       requests: [],
       augmentedRequests: [],
       calendarDates: [],
       calendarFormats: {
         data: ['YYYY-MM-DD']
+      },
+      calendarStyles: {
+        wrapper: {
+          borderRadius: '5px',
+          boxShadow:
+            '0 4px 8px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.13)'
+        },
+        headerHorizontalDivider: {
+          borderTop: 'solid rgba(0, 0, 0, 0.2) 1px',
+          width: '80%'
+        },
+        header: {
+          fontSize: '18pt',
+          padding: `10px ${hSpacing}`
+        },
+        headerTitle: {
+          fontSize: '16pt',
+          fontWeight: '700' // And bolder font weight
+        },
+        weekdays: {
+          padding: `20px ${hSpacing} 5px ${hSpacing}`,
+          fontWeight: '700', // And bolder font weight
+          fontSize: '12pt'
+        },
+        weeks: {
+          padding: `0 ${hSpacing} ${hSpacing} ${hSpacing}`
+        },
+        dayContent: {
+          fontSize: '11pt'
+        }
       },
       carColours: [
         '#79D27D',
@@ -45,9 +80,7 @@ export default {
   methods: {
     async getRequests() {
       try {
-        const response = await RequestService.getPendingRequests(
-          this.$store.state.user.id
-        )
+        const response = await RequestService.getCalendarDates()
         if (response.data && response.data !== []) {
           this.requests = response.data
           this.calendarDates = this.requests.map(request => ({
