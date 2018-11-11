@@ -7,8 +7,10 @@ import Vuetify from 'vuetify'
 import { sync } from 'vuex-router-sync'
 import store from '@/store/store'
 import Datetime from 'vue-datetime'
+import VCalendar from 'v-calendar'
 import 'vuetify/dist/vuetify.min.css'
 import 'vue-datetime/dist/vue-datetime.css'
+import 'v-calendar/lib/v-calendar.min.css'
 
 Vue.config.productionTip = false
 
@@ -21,6 +23,9 @@ Vue.use(Vuetify, {
   }
 })
 Vue.use(Datetime)
+Vue.use(VCalendar, {
+  firstDayOfWeek: 2 // Monday
+})
 
 sync(store, router)
 

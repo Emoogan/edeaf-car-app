@@ -5,11 +5,11 @@
       <router-link
       tag="span"
       class="home"
-      :to="{name: 'Home'}">EDeaf Car Booking</router-link>
+      :to="{name: 'Home'}">eDeaf Fleet Management System</router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn v-if="$store.state.isUserLoggedIn" flat>Calendar</v-btn>
+      <v-btn v-if="$store.state.isUserLoggedIn" :to="{name: 'Calendar'}" flat>Calendar</v-btn>
       <v-btn v-if="$store.state.isUserLoggedIn" :to="{name: 'CarRequest'}" flat>Request Car</v-btn>
       <v-btn v-if="$store.state.isUserLoggedIn" :to="{name: 'Request'}" flat>Pending requests</v-btn>
       <v-btn v-if="$store.state.isUserLoggedIn" flat>Approved requests</v-btn>

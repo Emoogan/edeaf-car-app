@@ -66,13 +66,11 @@ module.exports = {
         const user = res.locals.request.User
         const car = res.locals.request.Car
         const request = res.locals.request
-        console.log('1', request)
         var toList = [user.email]
         // if the request is cancelled, let the admins know as well
         if (request.status === 'Cancelled') {
           toList = toList.concat(adminList)
         }
-        console.log('2', toList)
         var requestStatusReason = ''
         if (request.statusReason !== null) {
           requestStatusReason = `The request was denied because ${request.statusReason}.`
@@ -96,7 +94,6 @@ module.exports = {
         This is an auto-generated email from an unattended mail box. 
         Please do not reply. For assistance contact IT support. `
         }
-        console.log('3', requestStatusReason)
 
 
         transporter.sendMail(mailOptions, (error, info) => {

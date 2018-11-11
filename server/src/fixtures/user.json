@@ -2,16 +2,25 @@
   {
     "model": "User",
     "data": {
-      "id": 1,
       "email": "test@gmail.com",
       "username": "cookiemonster",
       "firstName": "Cookie",
       "lastName": "Monster",
-      "office": "Johannesburg",
-      "password": "$2a$08$U.o/NS9ifln1zgQY7w5HBO/BvUTNLKlpjgGgpUrJxICkmvqMG2Cfm",
-      "updatedAt": "2018-11-03T19:20:46.965Z",
-      "createdAt": "2018-11-03T19:20:46.965Z",
+      "office": "Centurion",
+      "password": "$2a$08$aTgzFwjYCmf4ZwPejrUj8.wRiJb8C/xGGLSexotbLAqQr4q.Wp4na",
       "role": "Admin"
+    }
+  },
+  {
+    "model": "User",
+    "data": {
+      "email": "vimes@gmail.com",
+      "username": "cookies",
+      "firstName": "Commander",
+      "lastName": "Vimes",
+      "office": "Johannesburg",
+      "password": "$2a$08$aTgzFwjYCmf4ZwPejrUj8.wRiJb8C/xGGLSexotbLAqQr4q.Wp4na",
+      "role": "User"
     }
   }
 ]

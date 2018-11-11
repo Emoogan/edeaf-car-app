@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import CarRequest from '@/components/CarRequest'
 import Request from '@/components/Request'
+import Calendar from '@/components/Calendar'
 
 Vue.use(Router)
 
@@ -15,6 +15,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: CarRequest
+    },
+    {
+      path: '/calendar',
+      name: 'Calendar',
+      component: Calendar
     },
     {
       path: '/requests',
