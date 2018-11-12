@@ -72,7 +72,7 @@ module.exports = {
           toList = toList.concat(adminList)
         }
         var requestStatusReason = ''
-        if (request.statusReason !== null) {
+        if ( request.statusReason && request.statusReason !== null) {
           requestStatusReason = `The request was denied because ${request.statusReason}.`
         }
         // on created email should be sent to both user and admins

@@ -12,7 +12,7 @@
             <v-text-field name="username" v-model="username" label="Username"></v-text-field>
             <v-text-field name="firstName" v-model="firstName" label="First Name"></v-text-field>
             <v-text-field name="lastName" v-model="lastName" label="Last Name"></v-text-field>
-            <v-select name="office" v-model="office" :items="offices" label="Office"></v-select>
+            <v-select name="office" v-model="office" :items="offices" item-text="display" item-value="short" label="Office"></v-select>
             <v-text-field name="email" v-model="email" label="Email"></v-text-field>
             <v-text-field
               name="password"
@@ -48,7 +48,12 @@ export default {
       lastName: '',
       office: '',
       error: null,
-      offices: ['Centurion', 'Durban', 'Cape Town', 'Johannesburg'],
+      offices: [
+        { display: 'Centurion', short: 'CNT' },
+        { display: 'Durban', short: 'DBN' },
+        { display: 'Cape Town', short: 'CPT' },
+        { display: 'Johannesburg', short: 'JHB' }
+      ],
       isLoading: false
     }
   },
