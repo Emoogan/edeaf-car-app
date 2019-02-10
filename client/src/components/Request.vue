@@ -97,13 +97,15 @@ export default {
   },
   methods: {
     formatDate(dateString) {
+      return new Date(dateString).toString().replace(' GMT+0200 (South Africa Standard Time)', '')
+      // return new Date(dateString).toLocaleString()
       // expected format 2018-11-07T17:45:00.000Z
-      return (
-        `${dateString.substring(8, 10)}/${dateString.substring(
-          5,
-          7
-        )}/${dateString.substring(0, 4)}` + ` ${dateString.substring(11, 16)}`
-      )
+      // return (
+      //   `${dateString.substring(8, 10)}/${dateString.substring(
+      //     5,
+      //     7
+      //   )}/${dateString.substring(0, 4)}` + ` ${dateString.substring(11, 16)}`
+      // )
     },
     async save(statusReason, requestId) {
       await this.denyRequest(requestId, statusReason)

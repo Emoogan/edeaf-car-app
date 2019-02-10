@@ -91,8 +91,10 @@ export default {
               opacity: request.status === 'Pending' ? 0.3 : 1
             },
             dates: {
-              start: request.startTime.substr(0, 10),
-              end: request.finishTime.substr(0, 10)
+              // start: request.startTime.substr(0, 10),
+              start: new Date(request.startTime),
+              // end: request.finishTime.substr(0, 10)
+              end: new Date(request.finishTime)
             },
             popover: {
               slot: 'multi-day-row'
@@ -121,9 +123,11 @@ export default {
       // if endTime is currentDate displayed -> * - hh:mm
       // else *
       const startDate = new Date(startDateTime)
-      const startTime = startDateTime.substr(11, 5)
+      // const startTime = startDateTime.substr(11, 5)
+      const startTime = startDate.toLocaleTimeString()
       const finishDate = new Date(finishDateTime)
-      const finishTime = finishDateTime.substr(11, 5)
+      // const finishTime = finishDateTime.substr(11, 5)
+      const finishTime = finishDate.toLocaleTimeString()
       if (this.sameDay(startDate, finishDate)) {
         return `${startTime} - ${finishTime}`
       } else if (this.sameDay(currentDate, startDate)) {

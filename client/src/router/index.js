@@ -14,7 +14,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: CarRequest
+      component: Login
     },
     {
       path: '/calendar',
